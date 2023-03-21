@@ -13,11 +13,18 @@ export default function Calculator() {
     }
     
     const appendDisplay = (e) => {
+        const button = e.target.value
+        const operators = ['+', '-', '*', '/']
+
         setDisplay(prevDisplay => {
+            // when display has a number > 0 and you click an operator
+            if (result !== 0 && operators.includes(button))
+                return result.toString().concat(button)
+
             if (prevDisplay === '0')
-                return e.target.value
+                return button
             else
-                return prevDisplay.concat(e.target.value)
+                return prevDisplay.concat(button)
         })
     }
     
