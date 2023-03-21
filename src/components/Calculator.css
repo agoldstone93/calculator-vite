@@ -3,10 +3,27 @@
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(4, auto);
+
+}
+
+.calc-button {
+  height: 50px;
+  min-width: 50px;
+  font-size: 20px;
+}
+
+#display, #result {
+  grid-column: 1 / -1;
 }
 
 #display {
-  grid-column: 1 / -1;
+  font-size: 15px;
+  margin-left: auto;
+}
+
+#result {
+  font-size: 25px;
+  margin-left: auto;
 }
 
 #clear {

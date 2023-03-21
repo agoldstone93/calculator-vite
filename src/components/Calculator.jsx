@@ -11,7 +11,7 @@ export default function Calculator() {
         setDisplay('0')
         setResult(0)
     }
-
+    
     const appendDisplay = (e) => {
         setDisplay(prevDisplay => {
             if (prevDisplay === '0')
@@ -20,51 +20,39 @@ export default function Calculator() {
                 return prevDisplay.concat(e.target.value)
         })
     }
-
-    const buttons = [
-        {name: 'one', value: 1},
-        {name: 'clear', value: 'C'},
-        {name: 'percent', value: '%'},
-        {name: 'divide', value: '÷'},
-        {name: 'seven', value: '7'},
-        {name: 'eight', value: '8'},
-        {name: 'nine', value: '9'},
-        {name: 'multiply', value: '×'},
-        {name: 'four', value: '4'},
-        {name: 'five', value: '5'},
-        {name: 'six', value: '6'},
-        {name: 'subtract', value: '-'},
-        {name: 'one', value: '1'},
-        {name: 'two', value: '2'},
-        {name: 'three', value: '3'},
-        {name: 'add', value: '+'},
-        {name: 'zero', value: '0'},
-        {name: 'decimal', value: '.'},
-        {name: 'equals', value: '='},
-    ]
+    
+    const stripInvalid = (input) => {
+        return input.replace(/[^-()\d/*+.]/g, '');
+    }
+    
+    const execute = () => {
+        setDisplay('0')
+        setResult(eval(stripInvalid(display)))
+    }
 
     return (
         <div className='calc'>
             <div id='display'>{display}</div>
             <div id='result'>{result}</div>
+            
             <button className='calc-button' id='clear' onClick={clearAll}>C</button>
-            <button className='calc-button' id='percent'>%</button>
-            <button className='calc-button' id='divide'>÷</button>
-            <button className='calc-button' id='seven'>7</button>
-            <button className='calc-button' id='eight'>8</button>
-            <button className='calc-button' id='nine'>9</button>
-            <button className='calc-button' id='multiply'>×</button>
-            <button className='calc-button' id='four'>4</button>
-            <button className='calc-button' id='five'>5</button>
-            <button className='calc-button' id='six'>6</button>
-            <button className='calc-button' id='subtract'>-</button>
+            <button className='calc-button' id='percent' value='' onClick={appendDisplay}>%</button>
+            <button className='calc-button' id='divide' value='/' onClick={appendDisplay}>÷</button>
+            <button className='calc-button' id='seven' value='7' onClick={appendDisplay}>7</button>
+            <button className='calc-button' id='eight' value='8' onClick={appendDisplay}>8</button>
+            <button className='calc-button' id='nine' value='9' onClick={appendDisplay}>9</button>
+            <button className='calc-button' id='multiply' value='*' onClick={appendDisplay}>×</button>
+            <button className='calc-button' id='four' value='4' onClick={appendDisplay}>4</button>
+            <button className='calc-button' id='five' value='5' onClick={appendDisplay}>5</button>
+            <button className='calc-button' id='six' value='6' onClick={appendDisplay}>6</button>
+            <button className='calc-button' id='subtract' value='-' onClick={appendDisplay}>-</button>
             <button className='calc-button' id='one' value='1' onClick={appendDisplay}>1</button>
             <button className='calc-button' id='two' value='2' onClick={appendDisplay}>2</button>
-            <button className='calc-button' id='three'>3</button>
-            <button className='calc-button' id='add'>+</button>
-            <button className='calc-button' id='zero'>0</button>
-            <button className='calc-button' id='decimal'>.</button>
-            <button className='calc-button' id='equals'>=</button>
+            <button className='calc-button' id='three' value='3' onClick={appendDisplay}>3</button>
+            <button className='calc-button' id='add' value='+' onClick={appendDisplay}>+</button>
+            <button className='calc-button' id='zero' value='0' onClick={appendDisplay}>0</button>
+            <button className='calc-button' id='decimal' value='.' onClick={appendDisplay}>.</button>
+            <button className='calc-button' id='equals' value='=' onClick={execute}>=</button>
         </div>
     )
 }
