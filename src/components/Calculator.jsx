@@ -11,15 +11,14 @@ export default function Calculator() {
         setInput('0')
         setOutput(0)
     }
-
     
-    const appendDisplay = (e) => {
+    const appendInput = (e) => {
         const button = e.target.value
         const operators = ['+', '-', '*', '/']
         
         const lastNumber = (input) => input.split(/[-/*+]/).at(-1)
         
-        setInput(prevDisplay => {
+        setInput(prevInput => {
             // when display has a number > 0 and you click an operator
             if (output !== 0 && operators.includes(button)) {
                 setOutput(0)
@@ -27,16 +26,16 @@ export default function Calculator() {
             }
 
             if (button === '.')
-                return !lastNumber(prevDisplay).includes('.') ? prevDisplay.concat(button) : prevDisplay
+                return !lastNumber(prevInput).includes('.') ? prevInput.concat(button) : prevInput
 
             // If 2 or more operators are entered consecutively, the operation performed should be the 
             // last operator entered (excluding the negative (-) sign
 
 
-            if (prevDisplay === '0')
+            if (prevInput === '0')
                 return button
             else
-                return prevDisplay.concat(button)
+                return prevInput.concat(button)
 
         })
     }
@@ -74,7 +73,7 @@ export default function Calculator() {
             className='calc-button'
             id={button.name}
             value={button.value}
-            onClick={appendDisplay}
+            onClick={appendInput}
         >
             {button.text}
         </button>
